@@ -35,11 +35,6 @@ const updateTerm = async () => {
 const searchBtn = document.getElementById("searchTermBtn");
 searchBtn.addEventListener("click", updateTerm);
 
-const scrollUpBtn = document.getElementById("scrollUpBtn");
-scrollUpBtn.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
 document.addEventListener(
   "play",
   (event) => {
@@ -52,3 +47,38 @@ document.addEventListener(
   },
   true
 );
+
+// carousel section
+
+window.addEventListener("DOMContentLoaded", () => {
+  const slide = document.querySelector(".carousel-slide");
+
+  const slideWidth = slide.querySelector("img").clientWidth;
+
+  let position = 0;
+
+  const moveSlide = () => {
+    position -= slideWidth / 3;
+
+    if (position < -slideWidth * 2) {
+      position = 0;
+    }
+
+    slide.style.transform = `translateX(${position}px)`;
+  };
+
+  setInterval(moveSlide, 5000);
+});
+
+window.addEventListener("scroll", () => {
+  const btnTop = document.querySelector("#btn-top");
+  if (window.pageYOffset > 200) {
+    btnTop.style.display = "block";
+  } else {
+    btnTop.style.display = "none";
+  }
+});
+
+document.querySelector("#btn-top").addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});

@@ -5,17 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Music App</title>
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <div class="main">
       <h1>sound<span>trip</span></h1>
       <input type="text" id="searchTerm" placeholder="Enter a song or artist" />
       <button id="searchTermBtn">Search</button>
+
+      <div class="carousel-container">
+        <div class="carousel-slide">
+          <img src="./images/music1.jpg" alt="Image 1" />
+          <img src="./images/music2.jpg" alt="Image 2" />
+          <img src="./images/music3.jpg" alt="Image 3" />
+          <img src="./images/music4.jpg" alt="Image 1" />
+          <img src="./images/music5.jpg" alt="Image 2" />
+          <img src="./images/music6.jpg" alt="Image 3" />
+          <img src="./images/music7.jpg" alt="Image 1" />
+          <img src="./images/music8.jpg" alt="Image 2" />
+          <img src="./images/music9.jpg" alt="Image 3" />
+          <img src="./images/music10.jpg" alt="Image 1" />
+          <img src="./images/music11.jpg" alt="Image 2" />
+          <img src="./images/music12.jpg" alt="Image 3" />
+        </div>
+      </div>
+
+      <div id="app">
+        <div id="songs"></div>
+      </div>
     </div>
-    <hr />
-    <div id="app">
-      <div id="songs"></div>
-    </div>
+
+    <button id="btn-top" title="Return to top">Top</button>
+
     <div class="footer">Benjie Angeles | KodeGo 2023 ©</div>
 
     <script type="module" src="/main.js"></script>
