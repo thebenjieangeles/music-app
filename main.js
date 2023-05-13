@@ -40,20 +40,22 @@ const updateTerm = async () => {
       .slice(numResultsDisplayed, numResultsDisplayed + numResults)
       .map((result) => {
         return `
-          <article>
-            <img src="${result.artworkUrl100}">
-            <p>${result.artistName}</p>
-            <h4>${result.trackName}</h4>
-            <audio controls>
-              <source src="${result.previewUrl}">
-            </audio>
-          </article>
+          <div class="card">
+            <img class="card-img" src="${result.artworkUrl100}">
+            <div class="card-body">
+              <h4 class="card-title">${result.trackName}</h4>
+              <p class="card-text">${result.artistName}</p>
+              <audio controls>
+                <source src="${result.previewUrl}">
+              </audio>
+            </div>
+          </div>
         `;
       })
       .join("");
 
-    songContainer.innerHTML = resultsHtml;
-    numResultsDisplayed = numResults;
+    songContainer.innerHTML += resultsHtml;
+    numResultsDisplayed += numResults;
   } catch (error) {
     console.log("Request failed:", error);
   }
@@ -62,6 +64,7 @@ const updateTerm = async () => {
 const searchBtn = document.getElementById("searchTermBtn");
 searchBtn.addEventListener("click", () => {
   numResultsDisplayed = 0;
+  songContainer.innerHTML = "";
   updateTerm();
 });
 
