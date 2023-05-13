@@ -1,4 +1,5 @@
 import "./style.css";
+import images from "./images/index";
 
 const songContainer = document.getElementById("songs");
 const maxResults = 10;
