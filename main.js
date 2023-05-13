@@ -1,6 +1,8 @@
 import "./style.css";
 
 const songContainer = document.getElementById("songs");
+const maxResults = 10;
+let numResultsDisplayed = 0;
 
 const updateTerm = async () => {
   const term = document.getElementById("searchTerm").value.trim();
@@ -10,10 +12,18 @@ const updateTerm = async () => {
   }
 
   try {
-    const url = `https://itunes.apple.com/search?term=${term}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    songContainer.innerHTML = data.results
+    const songUrl = `https://itunes.apple.com/search?term=${term}`;
+    const songResponse = await fetch(songUrl);
+    const songData = await songResponse.json();
+    const results = songData.results;
+
+    const numResults = Math.min(
+      maxResults,
+      results.length - numResultsDisplayed
+    );
+
+    const resultsHtml = results
+      .slice(numResultsDisplayed, numResultsDisplayed + numResults)
       .map((result) => {
         return `
           <article>
@@ -27,26 +37,19 @@ const updateTerm = async () => {
         `;
       })
       .join("");
+
+    songContainer.innerHTML = resultsHtml;
+    numResultsDisplayed = numResults;
   } catch (error) {
     console.log("Request failed:", error);
   }
 };
 
 const searchBtn = document.getElementById("searchTermBtn");
-searchBtn.addEventListener("click", updateTerm);
-
-document.addEventListener(
-  "play",
-  (event) => {
-    const audio = document.getElementsByTagName("audio");
-    for (let i = 0; i < audio.length; i++) {
-      if (audio[i] !== event.target) {
-        audio[i].pause();
-      }
-    }
-  },
-  true
-);
+searchBtn.addEventListener("click", () => {
+  numResultsDisplayed = 0;
+  updateTerm();
+});
 
 // carousel section
 
@@ -70,9 +73,11 @@ window.addEventListener("DOMContentLoaded", () => {
   setInterval(moveSlide, 5000);
 });
 
+// back to top feature
+
 window.addEventListener("scroll", () => {
   const btnTop = document.querySelector("#btn-top");
-  if (window.pageYOffset > 200) {
+  if (window.pageYOffset > 300) {
     btnTop.style.display = "block";
   } else {
     btnTop.style.display = "none";
