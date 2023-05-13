@@ -11,7 +11,7 @@ import music10 from "./music10.jpg";
 import music11 from "./music11.jpg";
 import music12 from "./music12.jpg";
 
-export default {
+export {
   music1,
   music2,
   music3,
